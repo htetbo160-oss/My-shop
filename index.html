@@ -1,4 +1,5 @@
-
+<button onclick="order('86 Diamond')">Buy 86 Diamond</button>
+<button onclick="order('172 Diamond')">Buy 172 Diamond</button>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,5 +63,27 @@ input {
   </div>
 </div>
 
-<Diamond shop>
+</body>
 </html>
+
+<script>
+function order(item) {
+  let id = prompt("Enter Player ID:");
+
+  let message = "🛒 New Order\n"
+              + "Item: " + item + "\n"
+              + "Player ID: " + id;
+
+  let token = "YOUR_BOT_TOKEN";
+  let chat_id = "YOUR_CHAT_ID";
+
+  let url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(message);
+
+  fetch(url);
+
+  alert("Order Sent!");
+}
+  🛒 New Order
+Item: 86 Diamond
+Player ID: 12345678
+</script>
