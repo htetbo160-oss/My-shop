@@ -1,89 +1,134 @@
-<button onclick="order('86 Diamond')">Buy 86 Diamond</button>
-<button onclick="order('172 Diamond')">Buy 172 Diamond</button>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Diamond & UC Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoBoHtet Diamond Shop</title>
+
 <style>
 body {
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-  text-align: center;
+    font-family: Arial;
+    background:#f5f5f5;
+    text-align:center;
 }
-.container {
-  padding: 20px;
+
+h2 {
+    color:#ff4da6;
 }
-.card {
-  background: #1e293b;
-  margin: 10px;
-  padding: 15px;
-  border-radius: 10px;
+
+table {
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
 }
+
+th, td {
+    padding:12px;
+    border:1px solid #ddd;
+}
+
+th {
+    background:#ff4da6;
+    color:white;
+}
+
 button {
-  background: #22c55e;
-  border: none;
-  padding: 10px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+    background:#ff4da6;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
 }
-input {
-  padding: 10px;
-  width: 80%;
-  margin: 5px;
+
+button:hover {
+    background:#ff1a8c;
+}
+
+/* Popup */
+#paymentBox {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+.popup {
+    background:white;
+    margin:60px auto;
+    padding:20px;
+    width:90%;
+    max-width:350px;
+    border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>💎 Diamond & UC Shop</h1>
+<h2>💎 Mobile Legends Diamond Price List 💎</h2>
 
-  <div class="card">
-    <h2>Mobile Legends Diamond</h2>
-    <input type="text" placeholder="Enter Player ID"><br>
-    <button>Buy 86 Diamond</button>
-    <button>Buy 172 Diamond</button>
-  </div>
+<table>
+<tr>
+<th>Diamonds</th>
+<th>Price (MMK)</th>
+<th>Buy</th>
+</tr>
 
-  <div class="card">
-    <h2>PUBG UC</h2>
-    <input type="text" placeholder="Enter PUBG ID"><br>
-    <button>Buy 60 UC</button>
-    <button>Buy 325 UC</button>
-  </div>
+<tr><td>11 💎</td><td>1050</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>22 💎</td><td>2200</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>44 💎</td><td>4100</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>86 💎</td><td>5500</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>172 💎</td><td>11000</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>257 💎</td><td>17000</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>429 💎</td><td>27000</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>600 💎</td><td>37000</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>706 💎</td><td>40200</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
+<tr><td>1049 💎</td><td>65000</td><td><button onclick="openPayment()">ငွေသွင်းခြင်း</button></td></tr>
 
-  <div class="card">
-    <h3>Payment</h3>
-    <p>KBZPay / WavePay</p>
-    <p>Telegram: @YourShop</p>
+</table>
+
+<!-- Payment Popup -->
+<div id="paymentBox">
+  <div class="popup">
+
+    <h3>💰 ငွေသွင်းရန်</h3>
+
+    <p>KBZ Pay<br>BoBoHtet<br>09776937797</p>
+    <button onclick="copyText('KBZ Pay - BoBoHtet - 09776937797')">Copy</button>
+
+    <hr>
+
+    <p>Wave Money<br>BoBoHtet<br>09776937797</p>
+    <button onclick="copyText('Wave Money - BoBoHtet - 09776937797')">Copy</button>
+
+    <hr>
+
+    <p>AYA Pay<br>BoBoHtet<br>09776937797</p>
+    <button onclick="copyText('AYA Pay - BoBoHtet - 09776937797')">Copy</button>
+
+    <br><br>
+    <button onclick="closePayment()">Close</button>
+
   </div>
 </div>
 
+<script>
+function openPayment(){
+    document.getElementById("paymentBox").style.display="block";
+}
+
+function closePayment(){
+    document.getElementById("paymentBox").style.display="none";
+}
+
+function copyText(text){
+    navigator.clipboard.writeText(text);
+    alert("Copy လုပ်ပြီးပါပြီ။ ငွေသွင်းပါ 😊");
+}
+</script>
+
 </body>
 </html>
-
-<script>
-function order(item) {
-  let id = prompt("Enter Player ID:");
-
-  let message = "🛒 New Order\n"
-              + "Item: " + item + "\n"
-              + "Player ID: " + id;
-
-  let token = "YOUR_BOT_TOKEN";
-  let chat_id = "YOUR_CHAT_ID";
-
-  let url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(message);
-
-  fetch(url);
-
-  alert("Order Sent!");
-}
-  🛒 New Order
-Item: 86 Diamond
-Player ID: 12345678
-</script>
