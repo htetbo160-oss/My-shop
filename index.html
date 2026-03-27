@@ -3,222 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BoBoHtet Shop PRO</title>
+<title>BoBoHtet Game Shop</title>
 
 <style>
-body { font-family: Arial; margin:0; background:#f5f5f5; text-align:center; }
-
-.topbar {
-  background:#111; color:#fff; padding:10px;
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(to right,#0f75ff,#00c6ff);
 }
 
-h2 { color:#ff4da6; }
-
-table {
-  width:90%; margin:auto; border-collapse:collapse;
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    color:white;
 }
 
-th, td {
-  padding:10px; border:1px solid #ddd;
+.logo{
+    font-size:20px;
+    font-weight:bold;
 }
 
-th { background:#ff4da6; color:white; }
-
-button {
-  background:#ff4da6; color:white;
-  border:none; padding:8px 12px; cursor:pointer;
+/* CARD */
+.card{
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    margin:15px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
 
-button:hover { background:#ff1a8c; }
-
-/* Popup */
-.popup-bg {
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.6);
+/* GAME GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
 
-.popup {
-  background:white;
-  margin:60px auto;
-  padding:20px;
-  width:90%; max-width:320px;
-  border-radius:10px;
+.item{
+    background:white;
+    border-radius:10px;
+    padding:10px;
+    text-align:center;
 }
-input, select {
-  padding:8px; width:90%;
+
+.item img{
+    width:100%;
+    border-radius:10px;
+}
+
+/* BUTTON */
+.btn{
+    background:#ff2ca0;
+    color:white;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    width:100%;
+    margin-top:5px;
+}
+
+/* MONEY BOX */
+.money{
+    background:#00c853;
+    color:white;
+    padding:10px;
+    text-align:center;
+    font-size:18px;
+    border-radius:10px;
+}
+
+/* POPUP */
+.popup{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+.popup-content{
+    background:white;
+    margin:50px auto;
+    padding:20px;
+    width:90%;
+    border-radius:10px;
+}
+
+.copy{
+    background:black;
+    color:white;
+    padding:5px 10px;
+    border:none;
+    border-radius:5px;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- MONEY -->
-<div class="topbar">
-💰 Balance: <span id="balance">0</span> MMK
-<button onclick="openMoney()">+ ထည့်မယ်</button>
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">💎 BoBoHtet Shop</div>
+    <button onclick="openPay()">💰 Payment</button>
 </div>
 
-<h2>💎 Diamond Shop 💎</h2>
+<!-- MONEY -->
+<div class="card money">
+    Balance: <span id="money">0</span> MMK
+</div>
 
-<table>
-<tr><th>Diamond</th><th>Price</th><th>Buy</th></tr>
+<!-- ADD MONEY -->
+<div class="card">
+    <input type="number" id="addMoney" placeholder="ထည့်မည့်ငွေ">
+    <button class="btn" onclick="add()">Add Money</button>
+</div>
 
-<tr><td>11 💎</td><td>1050</td>
-<td><button onclick="buyDiamond(1050,'11 💎')">ဝယ်မယ်</button></td></tr>
+<!-- GAME LIST -->
+<div class="card">
+    <h3>🎮 Mobile Legends Diamonds</h3>
 
-<tr><td>22 💎</td><td>2200</td>
-<td><button onclick="buyDiamond(2200,'22 💎')">ဝယ်မယ်</button></td></tr>
+    <div class="grid">
 
-<tr><td>44 💎</td><td>4100</td>
-<td><button onclick="buyDiamond(4100,'44 💎')">ဝယ်မယ်</button></td></tr>
+        <div class="item">
+            <img src="https://i.imgur.com/8Km9tLL.png">
+            <p>11 💎</p>
+            <p>1000 MMK</p>
+            <button class="btn" onclick="buy(1000)">Buy</button>
+        </div>
 
-<tr><td>86 💎</td><td>5500</td>
-<td><button onclick="buyDiamond(5500,'86 💎')">ဝယ်မယ်</button></td></tr>
+        <div class="item">
+            <img src="https://i.imgur.com/8Km9tLL.png">
+            <p>22 💎</p>
+            <p>2000 MMK</p>
+            <button class="btn" onclick="buy(2000)">Buy</button>
+        </div>
 
-</table>
+        <div class="item">
+            <img src="https://i.imgur.com/8Km9tLL.png">
+            <p>86 💎</p>
+            <p>5500 MMK</p>
+            <button class="btn" onclick="buy(5500)">Buy</button>
+        </div>
 
-<!-- ORDER FORM -->
-<h2>📩 Order Form</h2>
-<input type="text" id="uid" placeholder="User ID"><br><br>
-<input type="text" id="server" placeholder="Server ID"><br><br>
+        <div class="item">
+            <img src="https://i.imgur.com/8Km9tLL.png">
+            <p>172 💎</p>
+            <p>11000 MMK</p>
+            <button class="btn" onclick="buy(11000)">Buy</button>
+        </div>
 
-<select id="package">
-<option>11 💎</option>
-<option>22 💎</option>
-<option>44 💎</option>
-<option>86 💎</option>
-</select><br><br>
-
-<button onclick="sendOrder()">Order Now</button>
-
-<!-- MONEY POPUP -->
-<div id="moneyBox" class="popup-bg">
-  <div class="popup">
-    <h3>💰 ငွေထည့်ရန်</h3>
-    <input type="number" id="amount" placeholder="ငွေထည့်ပါ">
-    <br><br>
-    <button onclick="addMoney()">ထည့်မယ်</button>
-    <br><br>
-    <button onclick="closeMoney()">Cancel</button>
-  </div>
+    </div>
 </div>
 
 <!-- PAYMENT POPUP -->
-<div id="paymentBox" class="popup-bg">
-  <div class="popup">
-    <h3>💳 ငွေသွင်းရန်</h3>
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>💰 ငွေသွင်းခြင်း</h3>
 
-    <p>KBZ Pay<br>BoBoHtet<br>09776937797</p>
-    <button onclick="copyText('KBZ Pay - BoBoHtet - 09776937797')">Copy</button>
+        <p>KBZ - BoBoHtet (09776937797)
+        <button class="copy" onclick="copy('09776937797')">Copy</button></p>
 
-    <hr>
+        <p>Wave - BoBoHtet (09776937797)
+        <button class="copy" onclick="copy('09776937797')">Copy</button></p>
 
-    <p>Wave Money<br>BoBoHtet<br>09776937797</p>
-    <button onclick="copyText('Wave Money - BoBoHtet - 09776937797')">Copy</button>
+        <p>AYA - BoBoHtet (09776937797)
+        <button class="copy" onclick="copy('09776937797')">Copy</button></p>
 
-    <hr>
+        <p style="color:red;">Copy ကိုနှိပ်ပြီး ငွေသွင်းပါ</p>
 
-    <p>AYA Pay<br>BoBoHtet<br>09776937797</p>
-    <button onclick="copyText('AYA Pay - BoBoHtet - 09776937797')">Copy</button>
-
-    <br><br>
-    <button onclick="closePayment()">Close</button>
-  </div>
+        <button class="btn" onclick="closePay()">Close</button>
+    </div>
 </div>
 
 <script>
-let balance = 0;
-let selectedPackage = "";
+let money = 0;
 
-// LOAD
-if(localStorage.getItem("money")){
-  balance = parseInt(localStorage.getItem("money"));
-  document.getElementById("balance").innerText = balance;
+function add(){
+    let val = document.getElementById("addMoney").value;
+    money += Number(val);
+    document.getElementById("money").innerText = money;
 }
 
-// MONEY
-function openMoney(){
-  document.getElementById("moneyBox").style.display="block";
+function buy(price){
+    if(money >= price){
+        money -= price;
+        document.getElementById("money").innerText = money;
+        alert("ဝယ်ယူပြီးပါပြီ ✅");
+    }else{
+        alert("ငွေမလုံလောက်ပါ ❌");
+    }
 }
 
-function closeMoney(){
-  document.getElementById("moneyBox").style.display="none";
+function openPay(){
+    document.getElementById("popup").style.display="block";
 }
 
-function addMoney(){
-  let amt = document.getElementById("amount").value;
-  if(amt=="" || amt<=0){
-    alert("ငွေထည့်ပါ!");
-    return;
-  }
-
-  balance += parseInt(amt);
-  document.getElementById("balance").innerText = balance;
-  localStorage.setItem("money", balance);
-
-  alert("ငွေထည့်ပြီးပါပြီ 💰");
-  closeMoney();
+function closePay(){
+    document.getElementById("popup").style.display="none";
 }
 
-// BUY
-function buyDiamond(price, pack){
-  selectedPackage = pack;
-
-  if(balance >= price){
-    balance -= price;
-    document.getElementById("balance").innerText = balance;
-    localStorage.setItem("money", balance);
-
-    alert("ဝယ်ယူမှုအောင်မြင်ပါသည် 💎");
-  } else {
-    alert("ငွေမလုံလောက်ပါ ❌");
-    openPayment();
-  }
-}
-
-// TELEGRAM ORDER
-function sendOrder(){
-  let uid = document.getElementById("uid").value;
-  let server = document.getElementById("server").value;
-  let pack = document.getElementById("package").value;
-
-  if(uid=="" || server==""){
-    alert("အချက်အလက်ဖြည့်ပါ!");
-    return;
-  }
-
-  let text = "New Order%0AUser ID: "+uid+
-             "%0AServer: "+server+
-             "%0APackage: "+pack;
-
-  let token = "@MLBBdianomdbot";
-  let chat_id = "8332477339:AAHTsR0UO54rgRZBALpi0T-6Hvt4755rtbE";
-
-  let url = "https://api.telegram.org/bot"+token+
-            "/sendMessage?chat_id="+chat_id+
-            "&text="+text;
-
-  window.open(url);
-
-  alert("Order ပို့ပြီးပါပြီ 📩");
-}
-
-// COPY
-function copyText(text){
-  navigator.clipboard.writeText(text);
-  alert("Copy လုပ်ပြီးပါပြီ။ ငွေသွင်းပါ 😊");
-}
-
-// PAYMENT
-function openPayment(){
-  document.getElementById("paymentBox").style.display="block";
-}
-
-function closePayment(){
-  document.getElementById("paymentBox").style.display="none";
+function copy(text){
+    navigator.clipboard.writeText(text);
+    alert("Copied ✅");
 }
 </script>
 
